@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotai DEX · Notas de Atualização — Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050714;
+    --card: rgba(10, 15, 42, 0.85);
+    --border: rgba(72, 96, 200, 0.3);
+    --text: #eef1fb;
+    --muted: #8a93b8;
+    --soft: #c9d1ee;
+    --blue: #5b8cff;
+    --blue-light: #a8c6ff;
+    --teal: #2dd4a0;
+    --purple: #a06bff;
+    --magenta: #d44fd0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* hero com glow forte e linhas de circuito */
+  .hero {
+    position: relative;
+    padding: 70px 24px 90px;
+    text-align: center;
+    background:
+      radial-gradient(800px 420px at 50% -10%, rgba(91,140,255,0.22), transparent 70%),
+      radial-gradient(500px 300px at 85% 30%, rgba(160,107,255,0.12), transparent 70%),
+      radial-gradient(400px 280px at 10% 45%, rgba(45,212,160,0.07), transparent 70%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(46,64,150,0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,64,150,0.2) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero > * { position: relative; }
+
+  .logo { display: inline-flex; align-items: center; gap: 11px; margin-bottom: 44px; }
+  .logo-mark {
+    width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--magenta), var(--purple) 45%, var(--blue));
+    font-family: 'Space Grotesk'; font-weight: 700; font-size: 23px; font-style: italic; color: #fff;
+    box-shadow: 0 0 28px rgba(160,107,255,0.55);
+  }
+  .logo-text { font-family: 'Space Grotesk'; font-weight: 700; font-size: 21px; letter-spacing: 0.06em; }
+  .logo-text .dex { background: linear-gradient(90deg, var(--blue), #4dd6e8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 18px; border-radius: 999px;
+    border: 1px solid rgba(91,140,255,0.5);
+    background: rgba(91,140,255,0.1);
+    color: var(--blue-light); font-size: 13px; font-weight: 600;
+    margin-bottom: 26px;
+    box-shadow: 0 0 30px rgba(91,140,255,0.18);
+  }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 10px var(--teal); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+
+  h1 {
+    font-family: 'Space Grotesk';
+    font-size: clamp(38px, 7vw, 62px);
+    font-weight: 700;
+    line-height: 1.1;
+    max-width: 700px;
+    margin: 0 auto 20px;
+  }
+  h1 .grad {
+    background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 55%, #4dd6e8 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 24px rgba(91,140,255,0.4));
+  }
+  .hero p { color: var(--muted); font-size: 17px; max-width: 480px; margin: 0 auto; }
+
+  /* barra de progresso do release */
+  .meter {
+    max-width: 560px;
+    margin: 44px auto 0;
+  }
+  .meter .bar {
+    display: flex; height: 10px; border-radius: 999px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .meter .seg.n { background: linear-gradient(90deg, #1ca87e, var(--teal)); flex: 4; box-shadow: 0 0 14px rgba(45,212,160,0.5); }
+  .meter .seg.m { background: linear-gradient(90deg, #3d6ae0, var(--blue)); flex: 4; }
+  .meter .seg.c { background: linear-gradient(90deg, #7b4fd6, var(--purple)); flex: 10; }
+  .meter .legend {
+    display: flex; justify-content: space-between; margin-top: 12px;
+    font-size: 12.5px; font-weight: 600; color: var(--muted);
+  }
+  .meter .legend b { font-weight: 700; }
+  .meter .legend .n b { color: var(--teal); }
+  .meter .legend .m b { color: var(--blue); }
+  .meter .legend .c b { color: var(--purple); }
+
+  /* conteúdo */
+  .content { max-width: 800px; margin: 0 auto; padding: 10px 20px 90px; }
+
+  details {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+  details[open] { border-color: rgba(91,140,255,0.55); box-shadow: 0 0 36px rgba(91,140,255,0.1); }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    padding: 20px 24px;
+    font-family: 'Space Grotesk'; font-size: 19px; font-weight: 600;
+    user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .ico {
+    width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+    font-size: 17px; background: rgba(91,140,255,0.12); border: 1px solid var(--border); flex-shrink: 0;
+  }
+  summary .meta { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  summary .qty { font-family: 'Inter'; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  summary .arrow { color: var(--blue); transition: transform 0.25s; font-size: 13px; }
+  details[open] .arrow { transform: rotate(90deg); }
+
+  .list { padding: 0 24px 18px 76px; }
+  .row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 11px 0;
+    border-top: 1px solid rgba(72,96,200,0.14);
+    font-size: 14.5px; color: var(--soft);
+  }
+  .tag {
+    flex-shrink: 0; margin-top: 2px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 999px; border: 1px solid;
+  }
+  .tag.n { color: var(--teal); border-color: rgba(45,212,160,0.4); background: rgba(45,212,160,0.08); }
+  .tag.m { color: var(--blue-light); border-color: rgba(91,140,255,0.45); background: rgba(91,140,255,0.1); }
+  .tag.c { color: #c4a6ff; border-color: rgba(160,107,255,0.4); background: rgba(160,107,255,0.09); }
+
+  .backstage {
+    margin-top: 36px;
+    background: linear-gradient(150deg, rgba(91,140,255,0.14), rgba(160,107,255,0.08) 55%, var(--card));
+    border: 1px solid rgba(91,140,255,0.5);
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .backstage h2 { font-family: 'Space Grotesk'; font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  .backstage p { color: var(--soft); font-size: 15px; }
+  .backstage strong { color: var(--blue-light); font-weight: 600; }
+
+  footer { text-align: center; padding-bottom: 60px; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 44px 16px 60px; }
+    .logo { margin-bottom: 32px; }
+    .content { padding: 6px 12px 60px; }
+    summary { padding: 16px 16px; font-size: 16.5px; gap: 10px; }
+    .ico { width: 32px; height: 32px; font-size: 14px; }
+    .list { padding: 0 16px 14px 16px; }
+    .row { flex-wrap: wrap; gap: 8px; font-size: 13.5px; }
+    .backstage { padding: 20px 16px; }
+    .meter { margin-top: 34px; }
+    .meter .legend { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="logo">
+      <div class="logo-mark">K</div>
+      <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
+    </div>
+    <br>
+    <div class="chip"><span class="dot"></span>Release · 12 de junho de 2026</div>
+    <h1>O que há de <span class="grad">novo</span> na plataforma</h1>
+    <p>Novidades, melhorias e correções que chegaram à Kotai DEX neste release.</p>
+
+    <div class="meter">
+      <div class="bar">
+        <div class="seg n"></div>
+        <div class="seg m"></div>
+        <div class="seg c"></div>
+      </div>
+      <div class="legend">
+        <span class="n"><b>4</b> novidades</span>
+        <span class="m"><b>4</b> melhorias</span>
+        <span class="c"><b>10</b> correções</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <details open>
+      <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">5 mudanças</span><span class="arrow">▶</span></span></summary>
+      <div class="list">
+        <div class="row"><span class="tag n">Novo</span><span>Novo popup explicando o impacto de preço na tela de swap.</span></div>
+        <div class="row"><span class="tag n">Novo</span><span>Na revisão do swap, a cotação se atualiza sozinha a cada 30 segundos, com animação a cada mudança.</span></div>
+        <div class="row"><span class="tag m">Melhoria</span><span>O token Kotai agora tem a opção de swap na própria tela, como os demais tokens.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Correções diversas no fluxo de swap.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Fechar o modal de revisão pelo X agora cancela a transação corretamente do lado da Dex.</span></div>
+      </div>
+    </details>
+
+    <details open>
+      <summary><span class="ico">◈</span>Pools e Liquidez<span class="meta"><span class="qty">8 mudanças</span><span class="arrow">▶</span></span></summary>
+      <div class="list">
+        <div class="row"><span class="tag n">Novo</span><span>A listagem de pools agora mostra pools de todas as redes.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Ajustes na tela de detalhes e na primeira etapa de criação, com formatação dos valores de depósito.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Corrigido o erro ao queimar o NFT de uma posição após remover toda a liquidez.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Corrigido o cálculo das fees na listagem, que apareciam acima do valor real.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Na criação de pools, o motivo de um bloqueio agora fica claro e o botão de fechar funciona.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Ao adicionar liquidez, avisamos quando o saldo do segundo token é insuficiente.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>Corrigido o botão de fechar que não respondia durante o carregamento em modais.</span></div>
+        <div class="row"><span class="tag c">Correção</span><span>A criação de pool informa o motivo quando é bloqueada e os campos não ficam mais presos.</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="ico">⌖</span>Posições<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <div class="list">
+        <div class="row"><span class="tag m">Melhoria</span><span>Tela de detalhes da posição: carregamento mais coerente, porcentagem na composição e destaque quando a posição sai do range.</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="ico">★</span>Tokens<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <div class="list">
+        <div class="row"><span class="tag n">Novo</span><span>Seus tokens favoritos agora ficam salvos entre sessões.</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="ico">▣</span>Carteira e Mobile<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <div class="list">
+        <div class="row"><span class="tag m">Melhoria</span><span>Novo design da tela de perfil e da troca de rede no mobile.</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="ico">⚡</span>Performance e Estabilidade<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <div class="list">
+        <div class="row"><span class="tag m">Melhoria</span><span>A tela inicial carrega muito mais rápido depois de conectar a carteira.</span></div>
+      </div>
+    </details>
+
+    <div class="backstage">
+      <h2>⚙ Nos bastidores</h2>
+      <p>Além do que aparece na tela, este release trouxe bastante trabalho de infraestrutura. Um <strong>novo cache</strong> deixou o carregamento dos dados de carteira e de pools mais rápido, vários fluxos de swap e de pagamentos ficaram <strong>mais resistentes a falhas</strong> (com reprocessamento automático no lugar de perder operações), e começamos a montar a base para novidades que vêm por aí, como a <strong>entrada de recursos via PIX</strong>. Nada disso muda a interface, mas deixa a plataforma mais rápida e estável.</p>
+    </div>
+
+  </div>
+
+  <footer>Kotai DEX · Release de 12 de junho de 2026</footer>
+
+</body>
+</html>
