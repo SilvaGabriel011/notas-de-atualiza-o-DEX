@@ -161,9 +161,33 @@
     .backstage { padding-left: 18px; }
     footer { flex-direction: column; gap: 6px; }
   }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(5, 7, 20, 0.82);
+    border: 1px solid rgba(91, 140, 255, 0.4);
+    color: #a8c6ff;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .back-btn:hover {
+    border-color: rgba(91, 140, 255, 0.7);
+    background: rgba(15, 22, 60, 0.92);
+  }
 </style>
 </head>
 <body>
+<a href="index.html" class="back-btn">← Galeria</a>
 <div class="wrap">
 
   <div class="topline">
