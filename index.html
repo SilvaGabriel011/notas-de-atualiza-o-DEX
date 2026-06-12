@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kotai DEX · Notas de Atualização</title>
+<title>Kotai DEX · Opções de Notas de Atualização</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,8 +40,6 @@
     position: relative;
     overflow-x: hidden;
   }
-
-  /* glow ambiente */
   body::before {
     content: '';
     position: fixed;
@@ -63,19 +61,18 @@
   }
 
   .wrap {
-    max-width: 880px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 56px 24px 96px;
     position: relative;
     z-index: 1;
   }
 
-  /* ---------- header ---------- */
   .logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 64px;
+    margin-bottom: 56px;
   }
   .logo-mark {
     width: 42px; height: 42px;
@@ -103,8 +100,7 @@
     color: transparent;
   }
 
-  .hero { text-align: center; margin-bottom: 24px; }
-
+  .hero { text-align: center; margin-bottom: 16px; }
   .release-badge {
     display: inline-flex;
     align-items: center;
@@ -125,13 +121,12 @@
     background: var(--teal);
     box-shadow: 0 0 8px var(--teal);
   }
-
   h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(34px, 6vw, 52px);
+    font-size: clamp(30px, 5vw, 44px);
     font-weight: 700;
     line-height: 1.15;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   h1 .highlight {
     background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
@@ -139,143 +134,122 @@
     background-clip: text;
     color: transparent;
   }
-
   .subtitle {
     color: var(--text-muted);
     font-size: 17px;
-    max-width: 520px;
+    max-width: 600px;
     margin: 0 auto 56px;
   }
 
-  /* ---------- resumo ---------- */
-  .stats {
+  /* ---------- grid de opções ---------- */
+  .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 56px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 22px;
   }
-  .stat {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px 16px;
-    text-align: center;
-    backdrop-filter: blur(8px);
-  }
-  .stat-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat-label {
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .stat.novo .stat-num { color: var(--teal); text-shadow: 0 0 18px rgba(45,212,160,0.4); }
-  .stat.melhoria .stat-num { color: var(--blue); text-shadow: 0 0 18px var(--glow-blue); }
-  .stat.correcao .stat-num { color: var(--purple); text-shadow: 0 0 18px rgba(160,107,255,0.4); }
 
-  /* ---------- seções ---------- */
-  section {
+  .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 32px 32px 22px;
-    margin-bottom: 22px;
-    backdrop-filter: blur(8px);
-    position: relative;
     overflow: hidden;
-  }
-  section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
-  }
-
-  .section-head {
+    backdrop-filter: blur(8px);
     display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
+    flex-direction: column;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
-  .section-icon {
-    width: 40px; height: 40px;
-    border-radius: 11px;
-    display: grid;
-    place-items: center;
-    background: rgba(91, 140, 255, 0.1);
-    border: 1px solid var(--border);
-    font-size: 19px;
-    flex-shrink: 0;
-  }
-  h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 21px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-  }
-
-  ul { list-style: none; }
-  li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 0;
-    border-top: 1px solid rgba(72, 96, 200, 0.14);
-    font-size: 15px;
-    color: #c9d1ee;
-  }
-  li:first-child { border-top: none; }
-
-  .tag {
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 999px;
-    border: 1px solid;
-  }
-  .tag.novo {
-    color: var(--teal);
-    border-color: rgba(45, 212, 160, 0.4);
-    background: rgba(45, 212, 160, 0.08);
-  }
-  .tag.melhoria {
-    color: var(--blue-light);
-    border-color: rgba(91, 140, 255, 0.45);
-    background: rgba(91, 140, 255, 0.1);
-  }
-  .tag.correcao {
-    color: #c4a6ff;
-    border-color: rgba(160, 107, 255, 0.4);
-    background: rgba(160, 107, 255, 0.09);
-  }
-
-  /* ---------- bastidores ---------- */
-  section.backstage {
-    background: linear-gradient(160deg, rgba(91,140,255,0.1) 0%, rgba(160,107,255,0.07) 55%, var(--bg-card-solid) 100%);
+  .card:hover {
     border-color: var(--border-strong);
-    padding-bottom: 32px;
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px -20px var(--glow-blue);
   }
-  section.backstage p {
-    color: #c9d1ee;
-    font-size: 15.5px;
+
+  /* preview ao vivo via iframe escalado */
+  .preview {
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card-solid);
   }
-  section.backstage strong { color: var(--blue-light); font-weight: 600; }
+  .preview iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1280px;
+    height: 920px;
+    border: 0;
+    transform: scale(0.36);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  .preview .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+  }
+  .preview .num {
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 3;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--blue-light);
+    background: rgba(5, 7, 20, 0.78);
+    border: 1px solid var(--border-strong);
+    padding: 4px 11px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+
+  .card-body {
+    padding: 20px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .card-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .card-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .btn:hover { border-color: var(--border-strong); background: rgba(91,140,255,0.08); }
+  .btn.primary {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    border: none;
+    color: #fff;
+    box-shadow: 0 0 18px -4px var(--glow-blue);
+  }
+  .btn.primary:hover { filter: brightness(1.08); }
 
   footer {
     text-align: center;
-    margin-top: 56px;
+    margin-top: 64px;
     color: var(--text-muted);
     font-size: 13.5px;
   }
@@ -287,32 +261,9 @@
 
   @media (max-width: 640px) {
     body { background-size: 40px 40px; }
-    .wrap { padding: 28px 16px 64px; }
-
-    .logo { margin-bottom: 40px; }
-    .logo-mark { width: 36px; height: 36px; font-size: 20px; border-radius: 10px; }
-    .logo-text { font-size: 18px; }
-
-    .release-badge { font-size: 12.5px; padding: 6px 14px; margin-bottom: 20px; }
-    .subtitle { font-size: 15px; margin-bottom: 36px; }
-
-    .stats { gap: 8px; margin-bottom: 36px; }
-    .stat { padding: 14px 8px; border-radius: 13px; }
-    .stat-num { font-size: 26px; }
-    .stat-label { font-size: 10.5px; letter-spacing: 0.06em; }
-
-    section { padding: 20px 16px 12px; border-radius: 16px; margin-bottom: 14px; }
-    .section-head { gap: 10px; margin-bottom: 14px; }
-    .section-icon { width: 34px; height: 34px; font-size: 16px; border-radius: 9px; }
-    h2 { font-size: 18px; }
-
-    li { font-size: 14px; padding: 11px 0; gap: 10px; }
-    .tag { font-size: 10px; padding: 3px 8px; margin-top: 2px; }
-
-    section.backstage { padding-bottom: 20px; }
-    section.backstage p { font-size: 14px; }
-
-    footer { margin-top: 36px; font-size: 12.5px; }
+    .wrap { padding: 32px 16px 64px; }
+    .logo { margin-bottom: 36px; }
+    .grid { grid-template-columns: 1fr; gap: 16px; }
   }
 </style>
 </head>
@@ -325,101 +276,50 @@
   </div>
 
   <div class="hero">
-    <div class="release-badge"><span class="dot"></span>Release · 12 de junho de 2026</div>
-    <h1>Notas de <span class="highlight">Atualização</span></h1>
-    <p class="subtitle">Confira as novidades, melhorias e correções que chegaram à plataforma neste release.</p>
+    <div class="release-badge"><span class="dot"></span>Seleção de design · Release 12/06/2026</div>
+    <h1>Escolha o layout das <span class="highlight">Notas de Atualização</span></h1>
+    <p class="subtitle">Montei 6 versões da mesma página de release com estilos diferentes. Dê uma olhada em cada uma e me diga qual o time prefere.</p>
   </div>
 
-  <div class="stats">
-    <div class="stat novo"><div class="stat-num">4</div><div class="stat-label">Novidades</div></div>
-    <div class="stat melhoria"><div class="stat-num">4</div><div class="stat-label">Melhorias</div></div>
-    <div class="stat correcao"><div class="stat-num">10</div><div class="stat-label">Correções</div></div>
-  </div>
-
-  <section>
-    <div class="section-head">
-      <div class="section-icon">⇄</div>
-      <h2>Swap</h2>
-    </div>
-    <ul>
-      <li><span class="tag novo">Novo</span><span>Novo popup explicando o impacto de preço na tela de swap.</span></li>
-      <li><span class="tag novo">Novo</span><span>Na revisão do swap, a cotação agora se atualiza sozinha a cada 30 segundos e qualquer mudança vem acompanhada de uma animação, facilitando o entendimento.</span></li>
-      <li><span class="tag melhoria">Melhoria</span><span>O token Kotai agora tem a opção de swap na própria tela, como os demais tokens.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Correções diversas no fluxo de swap.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Fechar o modal de revisão de troca pelo X agora cancela a transação corretamente do lado da Dex.</span></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div class="section-icon">◈</div>
-      <h2>Pools e Liquidez</h2>
-    </div>
-    <ul>
-      <li><span class="tag novo">Novo</span><span>A listagem de pools agora mostra pools de todas as redes.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Correções na tela de detalhes das pools e na primeira etapa de criação, com ajuste na formatação dos valores de depósito.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Corrigido o erro ao queimar o NFT de uma posição depois de remover toda a liquidez.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Corrigido o cálculo das fees exibidas na listagem de pools, que apareciam acima do valor real.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Na criação de pools, o motivo de um bloqueio agora fica claro e o botão de fechar funciona como esperado.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Ao adicionar liquidez, agora avisamos quando o saldo do segundo token é insuficiente.</span></li>
-      <li><span class="tag correcao">Correção</span><span>Corrigido o botão de fechar que não respondia durante o carregamento em modais de liquidez.</span></li>
-      <li><span class="tag correcao">Correção</span><span>A criação de pool agora informa o motivo quando é bloqueada e os campos não ficam mais presos.</span></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div class="section-icon">⌖</div>
-      <h2>Posições</h2>
-    </div>
-    <ul>
-      <li><span class="tag melhoria">Melhoria</span><span>Melhorias na tela de detalhes da posição: carregamento mais coerente, porcentagem na composição e destaque quando a posição sai do range.</span></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div class="section-icon">★</div>
-      <h2>Tokens</h2>
-    </div>
-    <ul>
-      <li><span class="tag novo">Novo</span><span>Seus tokens favoritos agora ficam salvos entre sessões.</span></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div class="section-icon">▣</div>
-      <h2>Carteira e Mobile</h2>
-    </div>
-    <ul>
-      <li><span class="tag melhoria">Melhoria</span><span>Novo design da tela de perfil e da troca de rede no mobile.</span></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div class="section-icon">⚡</div>
-      <h2>Performance e Estabilidade</h2>
-    </div>
-    <ul>
-      <li><span class="tag melhoria">Melhoria</span><span>A tela inicial carrega muito mais rápido depois de conectar a carteira.</span></li>
-    </ul>
-  </section>
-
-  <section class="backstage">
-    <div class="section-head">
-      <div class="section-icon">⚙</div>
-      <h2>Nos bastidores</h2>
-    </div>
-    <p>Além do que aparece na tela, este release trouxe bastante trabalho de infraestrutura. Um <strong>novo cache</strong> deixou o carregamento dos dados de carteira e de pools mais rápido, vários fluxos de swap e de pagamentos ficaram <strong>mais resistentes a falhas</strong> (com reprocessamento automático no lugar de perder operações), e começamos a montar a base para novidades que vêm por aí, como a <strong>entrada de recursos via PIX</strong>. Nada disso muda a interface, mas deixa a plataforma mais rápida e estável.</p>
-  </section>
+  <div class="grid" id="grid"></div>
 
   <footer>
     <div class="line"></div>
-    Kotai DEX · Release de 12 de junho de 2026
+    Kotai DEX · Galeria de opções — Release de 12 de junho de 2026
   </footer>
 
 </div>
+
+<script>
+  // Lista de opções. Para adicionar/remover uma versão, basta editar este array.
+  const options = [
+    { file: 'v1-original.html', title: 'V1 · Grid & Glow',  desc: 'A versão original: fundo escuro com grade, glow ambiente e cards de seção.' },
+    { file: 'v2-timeline.html', title: 'V2 · Timeline',      desc: 'Mudanças apresentadas em linha do tempo vertical, com marcos por área.' },
+    { file: 'v3-terminal.html', title: 'V3 · Terminal',      desc: 'Estética de changelog/terminal, monoespaçada e bem técnica.' },
+    { file: 'v4-editorial.html', title: 'V4 · Editorial',    desc: 'Layout tipo revista, com hierarquia tipográfica e respiro generoso.' },
+    { file: 'v5-bento.html',    title: 'V5 · Bento',          desc: 'Grade no estilo bento box, com blocos de tamanhos variados.' },
+    { file: 'v6-hero-glow.html', title: 'V6 · Hero',          desc: 'Hero de destaque com forte presença visual no topo da página.' },
+  ];
+
+  const grid = document.getElementById('grid');
+  options.forEach((opt, i) => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="preview">
+        <span class="num">${String(i + 1).padStart(2, '0')}</span>
+        <iframe src="${opt.file}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
+        <a class="overlay" href="${opt.file}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${opt.title}</div>
+        <div class="card-desc">${opt.desc}</div>
+        <div class="card-actions">
+          <a class="btn primary" href="${opt.file}" target="_blank" rel="noopener">Abrir versão</a>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+</script>
 </body>
 </html>
