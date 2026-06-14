@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotai DEX · Opções de Notas de Atualização</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050714;
+    --bg-card: rgba(10, 15, 42, 0.75);
+    --bg-card-solid: #0a0f2a;
+    --border: rgba(72, 96, 200, 0.28);
+    --border-strong: rgba(91, 140, 255, 0.5);
+    --grid-line: rgba(46, 64, 150, 0.18);
+    --text: #eef1fb;
+    --text-muted: #8a93b8;
+    --blue: #5b8cff;
+    --blue-light: #a8c6ff;
+    --teal: #2dd4a0;
+    --purple: #a06bff;
+    --magenta: #d44fd0;
+    --glow-blue: rgba(91, 140, 255, 0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: -300px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse, rgba(91,140,255,0.13) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -350px; right: -200px;
+    width: 800px; height: 700px;
+    background: radial-gradient(ellipse, rgba(160,107,255,0.08) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+  .logo-mark {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--magenta) 0%, var(--purple) 45%, var(--blue) 100%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    font-style: italic;
+    box-shadow: 0 0 24px rgba(160, 107, 255, 0.45);
+  }
+  .logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+  }
+  .logo-text .dex {
+    background: linear-gradient(90deg, var(--blue) 0%, #4dd6e8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero { text-align: center; margin-bottom: 16px; }
+  .release-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: rgba(91, 140, 255, 0.08);
+    color: var(--blue-light);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+  .release-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  h1 .highlight {
+    background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto 56px;
+  }
+
+  /* ---------- grid de opções ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 22px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px -20px var(--glow-blue);
+  }
+
+  /* preview ao vivo via iframe escalado */
+  .preview {
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card-solid);
+  }
+  .preview iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1280px;
+    height: 920px;
+    border: 0;
+    transform: scale(0.36);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  .preview .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+  }
+  .preview .num {
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 3;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--blue-light);
+    background: rgba(5, 7, 20, 0.78);
+    border: 1px solid var(--border-strong);
+    padding: 4px 11px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+
+  .card-body {
+    padding: 20px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .card-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .card-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .btn:hover { border-color: var(--border-strong); background: rgba(91,140,255,0.08); }
+  .btn.primary {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    border: none;
+    color: #fff;
+    box-shadow: 0 0 18px -4px var(--glow-blue);
+  }
+  .btn.primary:hover { filter: brightness(1.08); }
+
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    color: var(--text-muted);
+    font-size: 13.5px;
+  }
+  footer .line {
+    width: 120px; height: 1px;
+    margin: 0 auto 20px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  }
+
+  @media (max-width: 640px) {
+    body { background-size: 40px 40px; }
+    .wrap { padding: 32px 16px 64px; }
+    .logo { margin-bottom: 36px; }
+    .grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(5, 7, 20, 0.82);
+    border: 1px solid rgba(91, 140, 255, 0.4);
+    color: #a8c6ff;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .back-btn:hover {
+    border-color: rgba(91, 140, 255, 0.7);
+    background: rgba(15, 22, 60, 0.92);
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">← Releases</a>
+<div class="wrap">
+
+  <div class="logo">
+    <div class="logo-mark">K</div>
+    <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
+  </div>
+
+  <div class="hero">
+    <div class="release-badge"><span class="dot"></span>Seleção de design · Release 12/06/2026</div>
+    <h1>Escolha o layout das <span class="highlight">Notas de Atualização</span></h1>
+    <p class="subtitle">Montei 6 versões da mesma página de release com estilos diferentes. Dê uma olhada em cada uma e me diga qual o time prefere.</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <div class="line"></div>
+    Kotai DEX · Galeria de opções — Release de 12 de junho de 2026
+  </footer>
+
+</div>
+
+<script>
+  // Lista de opções. Para adicionar/remover uma versão, basta editar este array.
+  const options = [
+    { file: 'v1-original.html', title: 'V1 · Grid & Glow',  desc: 'A versão original: fundo escuro com grade, glow ambiente e cards de seção.' },
+    { file: 'v2-timeline.html', title: 'V2 · Timeline',      desc: 'Mudanças apresentadas em linha do tempo vertical, com marcos por área.' },
+    { file: 'v3-terminal.html', title: 'V3 · Terminal',      desc: 'Estética de changelog/terminal, monoespaçada e bem técnica.' },
+    { file: 'v4-editorial.html', title: 'V4 · Editorial',    desc: 'Layout tipo revista, com hierarquia tipográfica e respiro generoso.' },
+    { file: 'v5-bento.html',    title: 'V5 · Bento',          desc: 'Grade no estilo bento box, com blocos de tamanhos variados.' },
+    { file: 'v6-hero-glow.html', title: 'V6 · Hero',          desc: 'Hero de destaque com forte presença visual no topo da página.' },
+  ];
+
+  const grid = document.getElementById('grid');
+  options.forEach((opt, i) => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="preview">
+        <span class="num">${String(i + 1).padStart(2, '0')}</span>
+        <iframe src="${opt.file}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
+        <a class="overlay" href="${opt.file}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${opt.title}</div>
+        <div class="card-desc">${opt.desc}</div>
+        <div class="card-actions">
+          <a class="btn primary" href="${opt.file}" target="_blank" rel="noopener">Abrir versão</a>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+</script>
+</body>
+</html>
