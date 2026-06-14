@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kotai DEX · Opções de Notas de Atualização</title>
+<title>Kotai DEX · Notas de Atualização</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@
   }
 
   .wrap {
-    max-width: 1180px;
+    max-width: 920px;
     margin: 0 auto;
     padding: 56px 24px 96px;
     position: relative;
@@ -72,7 +72,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
   }
   .logo-mark {
     width: 42px; height: 42px;
@@ -100,7 +100,7 @@
     color: transparent;
   }
 
-  .hero { text-align: center; margin-bottom: 16px; }
+  .hero { margin-bottom: 40px; }
   .release-badge {
     display: inline-flex;
     align-items: center;
@@ -113,7 +113,7 @@
     font-size: 13.5px;
     font-weight: 600;
     letter-spacing: 0.04em;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
   .release-badge .dot {
     width: 7px; height: 7px;
@@ -126,7 +126,7 @@
     font-size: clamp(30px, 5vw, 44px);
     font-weight: 700;
     line-height: 1.15;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   h1 .highlight {
     background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
@@ -137,115 +137,112 @@
   .subtitle {
     color: var(--text-muted);
     font-size: 17px;
-    max-width: 600px;
-    margin: 0 auto 56px;
+    max-width: 620px;
   }
 
-  /* ---------- grid de opções ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  /* ---------- lista de releases ---------- */
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .release {
+    display: flex;
+    align-items: center;
     gap: 22px;
-  }
-
-  .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 18px;
+    padding: 22px 26px;
     backdrop-filter: blur(8px);
-    display: flex;
-    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
     transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
-  .card:hover {
+  .release:hover {
     border-color: var(--border-strong);
-    transform: translateY(-4px);
-    box-shadow: 0 18px 50px -20px var(--glow-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 50px -22px var(--glow-blue);
   }
 
-  /* preview ao vivo via iframe escalado */
-  .preview {
-    position: relative;
-    height: 230px;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-card-solid);
-  }
-  .preview iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 1280px;
-    height: 920px;
-    border: 0;
-    transform: scale(0.36);
-    transform-origin: top left;
-    pointer-events: none;
-  }
-  .preview .overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: block;
-  }
-  .preview .num {
-    position: absolute;
-    top: 12px; left: 12px;
-    z-index: 3;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: var(--blue-light);
-    background: rgba(5, 7, 20, 0.78);
-    border: 1px solid var(--border-strong);
-    padding: 4px 11px;
-    border-radius: 999px;
-    backdrop-filter: blur(4px);
-  }
-
-  .card-body {
-    padding: 20px 20px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
-  }
-  .card-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 19px;
-    font-weight: 600;
-  }
-  .card-desc {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 14px;
-    flex: 1;
-  }
-  .card-actions {
-    display: flex;
-    gap: 10px;
-  }
-  .btn {
-    flex: 1;
+  .release-date {
+    flex-shrink: 0;
+    width: 92px;
     text-align: center;
-    text-decoration: none;
-    font-size: 13.5px;
+    border-right: 1px solid var(--border);
+    padding-right: 22px;
+  }
+  .release-date .day {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--blue-light);
+  }
+  .release-date .my {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+
+  .release-main { flex: 1; min-width: 0; }
+  .release-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+  }
+  .release-version {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
     font-weight: 600;
-    padding: 10px 14px;
-    border-radius: 11px;
+  }
+  .release-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: rgba(91, 140, 255, 0.1);
+    color: var(--blue-light);
+  }
+  .release-desc {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    margin-bottom: 12px;
+  }
+  .counts {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .count {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
     border: 1px solid var(--border);
-    color: var(--text);
-    transition: background .2s ease, border-color .2s ease;
   }
-  .btn:hover { border-color: var(--border-strong); background: rgba(91,140,255,0.08); }
-  .btn.primary {
-    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
-    border: none;
-    color: #fff;
-    box-shadow: 0 0 18px -4px var(--glow-blue);
+  .count.novo { color: var(--teal); border-color: rgba(45, 212, 160, 0.4); background: rgba(45, 212, 160, 0.08); }
+  .count.melhoria { color: var(--blue-light); border-color: rgba(91, 140, 255, 0.45); background: rgba(91, 140, 255, 0.1); }
+  .count.correcao { color: #c4a6ff; border-color: rgba(160, 107, 255, 0.4); background: rgba(160, 107, 255, 0.09); }
+
+  .chevron {
+    flex-shrink: 0;
+    font-size: 22px;
+    color: var(--text-muted);
+    transition: transform .2s ease, color .2s ease;
   }
-  .btn.primary:hover { filter: brightness(1.08); }
+  .release:hover .chevron {
+    transform: translateX(4px);
+    color: var(--blue-light);
+  }
 
   footer {
     text-align: center;
@@ -262,8 +259,14 @@
   @media (max-width: 640px) {
     body { background-size: 40px 40px; }
     .wrap { padding: 32px 16px 64px; }
-    .logo { margin-bottom: 36px; }
-    .grid { grid-template-columns: 1fr; gap: 16px; }
+    .logo { margin-bottom: 32px; }
+    .release { gap: 16px; padding: 18px; }
+    .release-date { width: 64px; padding-right: 16px; }
+    .release-date .day { font-size: 24px; }
+    .release-date .my { font-size: 11px; }
+    .release-version { font-size: 16px; }
+    .release-desc { font-size: 13.5px; }
+    .chevron { display: none; }
   }
 </style>
 </head>
@@ -276,49 +279,64 @@
   </div>
 
   <div class="hero">
-    <div class="release-badge"><span class="dot"></span>Seleção de design · Release 12/06/2026</div>
-    <h1>Escolha o layout das <span class="highlight">Notas de Atualização</span></h1>
-    <p class="subtitle">Montei 6 versões da mesma página de release com estilos diferentes. Dê uma olhada em cada uma e me diga qual o time prefere.</p>
+    <div class="release-badge"><span class="dot"></span>Histórico de releases</div>
+    <h1>Notas de <span class="highlight">Atualização</span></h1>
+    <p class="subtitle">Cada release que sobe pra plataforma fica registrado aqui. Clique numa linha para ver as notas daquela atualização.</p>
   </div>
 
-  <div class="grid" id="grid"></div>
+  <div class="list" id="list"></div>
 
   <footer>
     <div class="line"></div>
-    Kotai DEX · Galeria de opções — Release de 12 de junho de 2026
+    Kotai DEX · Notas de Atualização
   </footer>
 
 </div>
 
 <script>
-  // Lista de opções. Para adicionar/remover uma versão, basta editar este array.
-  const options = [
-    { file: 'v1-original.html', title: 'V1 · Grid & Glow',  desc: 'A versão original: fundo escuro com grade, glow ambiente e cards de seção.' },
-    { file: 'v2-timeline.html', title: 'V2 · Timeline',      desc: 'Mudanças apresentadas em linha do tempo vertical, com marcos por área.' },
-    { file: 'v3-terminal.html', title: 'V3 · Terminal',      desc: 'Estética de changelog/terminal, monoespaçada e bem técnica.' },
-    { file: 'v4-editorial.html', title: 'V4 · Editorial',    desc: 'Layout tipo revista, com hierarquia tipográfica e respiro generoso.' },
-    { file: 'v5-bento.html',    title: 'V5 · Bento',          desc: 'Grade no estilo bento box, com blocos de tamanhos variados.' },
-    { file: 'v6-hero-glow.html', title: 'V6 · Hero',          desc: 'Hero de destaque com forte presença visual no topo da página.' },
+  // Lista de releases, do mais recente para o mais antigo.
+  // Para registrar uma nova atualização, adicione um objeto no TOPO deste array.
+  const releases = [
+    {
+      date: '2026-06-12',
+      version: 'Release · 12 de junho de 2026',
+      tag: 'Atual',
+      desc: 'Novidades, melhorias e correções que chegaram à plataforma neste ciclo.',
+      counts: { novo: 4, melhoria: 4, correcao: 10 },
+      link: 'galeria.html',
+    },
   ];
 
-  const grid = document.getElementById('grid');
-  options.forEach((opt, i) => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.innerHTML = `
-      <div class="preview">
-        <span class="num">${String(i + 1).padStart(2, '0')}</span>
-        <iframe src="${opt.file}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
-        <a class="overlay" href="${opt.file}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
+  const MESES = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+
+  // Garante a ordem do mais recente para o mais antigo.
+  releases.sort((a, b) => b.date.localeCompare(a.date));
+
+  const list = document.getElementById('list');
+  releases.forEach((r) => {
+    const [year, month, day] = r.date.split('-').map(Number);
+    const a = document.createElement('a');
+    a.className = 'release';
+    a.href = r.link;
+    a.innerHTML = `
+      <div class="release-date">
+        <div class="day">${String(day).padStart(2, '0')}</div>
+        <div class="my">${MESES[month - 1]} ${year}</div>
       </div>
-      <div class="card-body">
-        <div class="card-title">${opt.title}</div>
-        <div class="card-desc">${opt.desc}</div>
-        <div class="card-actions">
-          <a class="btn primary" href="${opt.file}" target="_blank" rel="noopener">Abrir versão</a>
+      <div class="release-main">
+        <div class="release-top">
+          <span class="release-version">${r.version}</span>
+          ${r.tag ? `<span class="release-tag">${r.tag}</span>` : ''}
         </div>
-      </div>`;
-    grid.appendChild(card);
+        <div class="release-desc">${r.desc}</div>
+        <div class="counts">
+          <span class="count novo">${r.counts.novo} novidades</span>
+          <span class="count melhoria">${r.counts.melhoria} melhorias</span>
+          <span class="count correcao">${r.counts.correcao} correções</span>
+        </div>
+      </div>
+      <div class="chevron">›</div>`;
+    list.appendChild(a);
   });
 </script>
 </body>
