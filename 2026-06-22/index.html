@@ -271,21 +271,27 @@
     { file: 'v6-hero-glow.html', title: 'V6 · Hero',          desc: 'Hero de destaque com forte presença visual no topo.' },
   ];
 
+  // Descobre a pasta desta galeria a partir da URL atual, funcionando com ou
+  // sem cleanUrls / barra final. Assim esta galeria pode ser copiada para a
+  // pasta de qualquer release novo sem precisar ajustar caminho nenhum.
+  const base = location.pathname.replace(/\/(index\.html)?$/, '');
+
   const grid = document.getElementById('grid');
   options.forEach((opt, i) => {
+    const href = `${base}/${opt.file}`;
     const card = document.createElement('article');
     card.className = 'card';
     card.innerHTML = `
       <div class="preview">
         <span class="num">${String(i + 1).padStart(2, '0')}</span>
-        <iframe src="/2026-06-22/${opt.file}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
-        <a class="overlay" href="/2026-06-22/${opt.file}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
+        <iframe src="${href}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
+        <a class="overlay" href="${href}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
       </div>
       <div class="card-body">
         <div class="card-title">${opt.title}</div>
         <div class="card-desc">${opt.desc}</div>
         <div class="card-actions">
-          <a class="btn primary" href="/2026-06-22/${opt.file}" target="_blank" rel="noopener">Abrir versão</a>
+          <a class="btn primary" href="${href}" target="_blank" rel="noopener">Abrir versão</a>
         </div>
       </div>`;
     grid.appendChild(card);
