@@ -136,8 +136,15 @@
   }
   summary .meta { margin-left: auto; display: flex; align-items: center; gap: 10px; }
   summary .qty { font-family: 'Inter'; font-size: 12.5px; font-weight: 600; color: var(--muted); }
-  summary .arrow { color: var(--blue); transition: transform 0.25s; font-size: 13px; }
-  details[open] .arrow { transform: rotate(90deg); }
+  summary .arrow {
+    width: 8px; height: 8px;
+    border-right: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
+    transform: rotate(45deg);
+    transition: transform 0.25s;
+    margin: -3px 2px 0 0;
+  }
+  details[open] .arrow { transform: rotate(225deg); }
 
   .list { padding: 0 24px 18px 76px; }
   .row {
@@ -206,7 +213,7 @@
 </style>
 </head>
 <body>
-<a href="galeria.html" class="back-btn">← Galeria</a>
+<a href="/" class="back-btn">← Releases</a>
 
   <div class="hero">
     <div class="logo">
@@ -235,7 +242,7 @@
   <div class="content">
 
     <details open>
-      <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">5 mudanças</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">5 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag n">Novo</span><span>Novo popup explicando o impacto de preço na tela de swap.</span></div>
         <div class="row"><span class="tag n">Novo</span><span>Na revisão do swap, a cotação se atualiza sozinha a cada 30 segundos, com animação a cada mudança.</span></div>
@@ -246,7 +253,7 @@
     </details>
 
     <details open>
-      <summary><span class="ico">◈</span>Pools e Liquidez<span class="meta"><span class="qty">8 mudanças</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">◈</span>Pools e Liquidez<span class="meta"><span class="qty">8 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag n">Novo</span><span>A listagem de pools agora mostra pools de todas as redes.</span></div>
         <div class="row"><span class="tag c">Correção</span><span>Ajustes na tela de detalhes e na primeira etapa de criação, com formatação dos valores de depósito.</span></div>
@@ -260,28 +267,28 @@
     </details>
 
     <details>
-      <summary><span class="ico">⌖</span>Posições<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">⌖</span>Posições<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Tela de detalhes da posição: carregamento mais coerente, porcentagem na composição e destaque quando a posição sai do range.</span></div>
       </div>
     </details>
 
     <details>
-      <summary><span class="ico">★</span>Tokens<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">★</span>Tokens<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag n">Novo</span><span>Seus tokens favoritos agora ficam salvos entre sessões.</span></div>
       </div>
     </details>
 
     <details>
-      <summary><span class="ico">▣</span>Carteira e Mobile<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">▣</span>Carteira e Mobile<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Novo design da tela de perfil e da troca de rede no mobile.</span></div>
       </div>
     </details>
 
     <details>
-      <summary><span class="ico">⚡</span>Performance e Estabilidade<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">⚡</span>Performance e Estabilidade<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>A tela inicial carrega muito mais rápido depois de conectar a carteira.</span></div>
       </div>

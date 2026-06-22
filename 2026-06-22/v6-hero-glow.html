@@ -136,8 +136,15 @@
   }
   summary .meta { margin-left: auto; display: flex; align-items: center; gap: 10px; }
   summary .qty { font-family: 'Inter'; font-size: 12.5px; font-weight: 600; color: var(--muted); }
-  summary .arrow { color: var(--blue); transition: transform 0.25s; font-size: 13px; }
-  details[open] .arrow { transform: rotate(90deg); }
+  summary .arrow {
+    width: 8px; height: 8px;
+    border-right: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
+    transform: rotate(45deg);
+    transition: transform 0.25s;
+    margin: -3px 2px 0 0;
+  }
+  details[open] .arrow { transform: rotate(225deg); }
 
   .list { padding: 0 24px 18px 76px; }
   .row {
@@ -206,7 +213,7 @@
 </style>
 </head>
 <body>
-<a href="index.html" class="back-btn">← Galeria</a>
+<a href="/" class="back-btn">← Releases</a>
 
   <div class="hero">
     <div class="logo">
@@ -235,7 +242,7 @@
   <div class="content">
 
     <details open>
-      <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">2 mudanças</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">2 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Quando o impacto de preço é zero, agora aparece como &gt;0,00% em vez de parecer erro ou tela travada.</span></div>
         <div class="row"><span class="tag c">Correção</span><span>Removemos o prazo de troca da tela, alinhando com o comportamento atual do swap.</span></div>
@@ -243,7 +250,7 @@
     </details>
 
     <details open>
-      <summary><span class="ico">◈</span>Posições e Pools<span class="meta"><span class="qty">4 mudanças</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">◈</span>Posições e Pools<span class="meta"><span class="qty">4 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Padronizamos os campos da tela de criação de posição para um comportamento mais consistente.</span></div>
         <div class="row"><span class="tag m">Melhoria</span><span>Quando você ainda não tem nenhuma posição, a opção de criar agora fica em destaque na tela.</span></div>
@@ -253,7 +260,7 @@
     </details>
 
     <details open>
-      <summary><span class="ico">▣</span>Navegação e Layout<span class="meta"><span class="qty">1 mudança</span><span class="arrow">▶</span></span></summary>
+      <summary><span class="ico">▣</span>Navegação e Layout<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Ajustamos o seletor entre as telas de Mercado e Início para seguir o padrão visual do app.</span></div>
       </div>
