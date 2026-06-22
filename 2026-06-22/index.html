@@ -242,7 +242,7 @@
       <div class="logo-mark">K</div>
       <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
     </div>
-    <a class="back-link" href="../index.html">← Todos os releases</a>
+    <a class="back-link" href="/">← Todos os releases</a>
   </div>
 
   <div class="hero">
@@ -278,14 +278,14 @@
     card.innerHTML = `
       <div class="preview">
         <span class="num">${String(i + 1).padStart(2, '0')}</span>
-        <iframe src="${opt.file}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
-        <a class="overlay" href="${opt.file}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
+        <iframe src="/2026-06-22/${opt.file}" loading="lazy" title="Preview ${opt.title}" scrolling="no"></iframe>
+        <a class="overlay" href="/2026-06-22/${opt.file}" target="_blank" rel="noopener" aria-label="Abrir ${opt.title}"></a>
       </div>
       <div class="card-body">
         <div class="card-title">${opt.title}</div>
         <div class="card-desc">${opt.desc}</div>
         <div class="card-actions">
-          <a class="btn primary" href="${opt.file}" target="_blank" rel="noopener">Abrir versão</a>
+          <a class="btn primary" href="/2026-06-22/${opt.file}" target="_blank" rel="noopener">Abrir versão</a>
         </div>
       </div>`;
     grid.appendChild(card);
