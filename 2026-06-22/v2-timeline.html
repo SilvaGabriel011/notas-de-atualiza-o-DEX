@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotai DEX · Notas de Atualização — Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050714;
+    --card: rgba(10, 15, 42, 0.8);
+    --border: rgba(72, 96, 200, 0.28);
+    --line: rgba(91, 140, 255, 0.35);
+    --text: #eef1fb;
+    --muted: #8a93b8;
+    --blue: #5b8cff;
+    --blue-light: #a8c6ff;
+    --teal: #2dd4a0;
+    --purple: #a06bff;
+    --magenta: #d44fd0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(600px 400px at 15% 10%, rgba(91,140,255,0.1), transparent),
+      radial-gradient(500px 400px at 90% 80%, rgba(160,107,255,0.08), transparent);
+    pointer-events: none;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; position: relative; }
+
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 52px; }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--magenta), var(--purple) 45%, var(--blue));
+    font-family: 'Space Grotesk'; font-weight: 700; font-size: 21px; font-style: italic;
+    box-shadow: 0 0 20px rgba(160,107,255,0.4);
+  }
+  .logo-text { font-family: 'Space Grotesk'; font-weight: 700; font-size: 19px; letter-spacing: 0.05em; }
+  .logo-text .dex { background: linear-gradient(90deg, var(--blue), #4dd6e8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  header h1 {
+    font-family: 'Space Grotesk'; font-size: clamp(30px, 5.5vw, 44px); font-weight: 700; line-height: 1.15;
+  }
+  header h1 span { background: linear-gradient(90deg, var(--blue), var(--blue-light)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  header .date { color: var(--muted); font-size: 15px; margin: 10px 0 6px; }
+  header .date b { color: var(--teal); font-weight: 600; }
+  header p.intro { color: var(--muted); font-size: 15.5px; max-width: 480px; }
+
+  /* timeline */
+  .timeline { margin-top: 56px; position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--teal), var(--blue) 35%, var(--purple) 75%, transparent);
+    opacity: 0.55;
+  }
+  .group { position: relative; margin-bottom: 44px; }
+  .group:last-child { margin-bottom: 0; }
+  .node {
+    position: absolute;
+    left: -30px; top: 5px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--blue);
+    box-shadow: 0 0 14px rgba(91,140,255,0.5);
+  }
+  .node::after {
+    content: '';
+    position: absolute; inset: 4px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .group.t-teal .node { border-color: var(--teal); box-shadow: 0 0 14px rgba(45,212,160,0.5); }
+  .group.t-teal .node::after { background: var(--teal); }
+  .group.t-purple .node { border-color: var(--purple); box-shadow: 0 0 14px rgba(160,107,255,0.5); }
+  .group.t-purple .node::after { background: var(--purple); }
+
+  .group h2 {
+    font-family: 'Space Grotesk'; font-size: 20px; font-weight: 600; margin-bottom: 4px;
+  }
+  .group .count { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+
+  .item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    font-size: 14.5px;
+    color: #c9d1ee;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    backdrop-filter: blur(6px);
+  }
+  .pill {
+    flex-shrink: 0; margin-top: 2px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 999px; border: 1px solid;
+  }
+  .pill.n { color: var(--teal); border-color: rgba(45,212,160,0.4); background: rgba(45,212,160,0.08); }
+  .pill.m { color: var(--blue-light); border-color: rgba(91,140,255,0.45); background: rgba(91,140,255,0.1); }
+  .pill.c { color: #c4a6ff; border-color: rgba(160,107,255,0.4); background: rgba(160,107,255,0.09); }
+
+  .backstage {
+    margin-top: 56px;
+    background: linear-gradient(160deg, rgba(91,140,255,0.12), rgba(160,107,255,0.07) 60%, var(--card));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .backstage h2 { font-family: 'Space Grotesk'; font-size: 19px; margin-bottom: 12px; }
+  .backstage p { color: #c9d1ee; font-size: 14.5px; }
+  .backstage strong { color: var(--blue-light); font-weight: 600; }
+
+  footer { text-align: center; margin-top: 48px; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 32px 14px 60px; }
+    .timeline { padding-left: 24px; }
+    .node { left: -24px; width: 16px; height: 16px; }
+    .node::after { inset: 3px; }
+    .item { padding: 12px 14px; font-size: 13.5px; flex-wrap: wrap; gap: 8px; }
+    .backstage { padding: 20px 16px; }
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(5, 7, 20, 0.82);
+    border: 1px solid rgba(91, 140, 255, 0.4);
+    color: #a8c6ff;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .back-btn:hover {
+    border-color: rgba(91, 140, 255, 0.7);
+    background: rgba(15, 22, 60, 0.92);
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">← Galeria</a>
+<div class="wrap">
+  <div class="logo">
+    <div class="logo-mark">K</div>
+    <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
+  </div>
+
+  <header>
+    <h1>Notas de <span>Atualização</span></h1>
+    <p class="date">Release de <b>22 de junho de 2026</b></p>
+    <p class="intro">Confira as novidades, melhorias e correções que chegaram à plataforma neste release.</p>
+  </header>
+
+  <div class="timeline">
+
+    <div class="group">
+      <div class="node"></div>
+      <h2>Swap</h2>
+      <p class="count">2 mudanças</p>
+      <div class="item"><span class="pill m">Melhoria</span><span>Quando o impacto de preço é zero, agora aparece como &gt;0,00% em vez de parecer erro ou tela travada.</span></div>
+      <div class="item"><span class="pill c">Correção</span><span>Removemos o prazo de troca da tela, alinhando com o comportamento atual do swap.</span></div>
+    </div>
+
+    <div class="group t-purple">
+      <div class="node"></div>
+      <h2>Posições e Pools</h2>
+      <p class="count">4 mudanças</p>
+      <div class="item"><span class="pill m">Melhoria</span><span>Padronizamos os campos da tela de criação de posição para um comportamento mais consistente.</span></div>
+      <div class="item"><span class="pill m">Melhoria</span><span>Quando você ainda não tem nenhuma posição, a opção de criar agora fica em destaque na tela.</span></div>
+      <div class="item"><span class="pill c">Correção</span><span>Corrigido o segundo token que aparecia cortado em telas de celular menores na criação de pool ou posição.</span></div>
+      <div class="item"><span class="pill c">Correção</span><span>Corrigidos valores que apareciam errados na página de posição.</span></div>
+    </div>
+
+    <div class="group t-teal">
+      <div class="node"></div>
+      <h2>Navegação e Layout</h2>
+      <p class="count">1 mudança</p>
+      <div class="item"><span class="pill m">Melhoria</span><span>Ajustamos o seletor entre as telas de Mercado e Início para seguir o padrão visual do app.</span></div>
+    </div>
+
+  </div>
+
+  <div class="backstage">
+    <h2>⚙ Nos bastidores</h2>
+    <p>Por trás das telas, esta semana foi grande no backend. Concluímos o <strong>fluxo completo de compra de cripto via PIX</strong> (deposit, purchase e send), que entra em produção assim que a tela for integrada, e adicionamos <strong>preços em BRL e USD</strong> com conversão no servidor. Também simplificamos a autenticação, corrigimos o <strong>cálculo de APR</strong> exibido nas pools e melhoramos o swap com <strong>suporte automático a token nativo</strong>. E começamos a construir a nova versão do frontend em <strong>Next.js</strong>.</p>
+  </div>
+
+  <footer>Kotai DEX · Release de 22 de junho de 2026</footer>
+</div>
+</body>
+</html>
