@@ -327,15 +327,84 @@
     .fade-up { animation: none; opacity: 1; transform: none; }
     .cta { transition: none; }
   }
+
+  /* ====== redesign ousado (dark Kotai) ====== */
+  /* fundo com gradientes em movimento */
+  @keyframes drift1 {
+    0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+    50%      { transform: translateX(-44%) translateY(48px) scale(1.18); }
+  }
+  @keyframes drift2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-70px, -48px) scale(1.12); }
+  }
+  @keyframes drift3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: .6; }
+    50%      { transform: translate(60px, 40px) scale(1.22); opacity: 1; }
+  }
+  body::before { animation: drift1 22s ease-in-out infinite; }
+  body::after  { animation: drift2 26s ease-in-out infinite; }
+  .glow-teal {
+    position: fixed; z-index: 0; pointer-events: none;
+    top: 24%; left: -220px; width: 640px; height: 640px;
+    background: radial-gradient(ellipse, rgba(45,212,160,0.12) 0%, transparent 65%);
+    animation: drift3 30s ease-in-out infinite;
+  }
+
+  /* navbar */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 60px;
+  }
+  .nav .logo { margin-bottom: 0; }
+  .nav-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: rgba(91, 140, 255, 0.08);
+    color: var(--blue-light); font-weight: 600; font-size: 14px;
+    text-decoration: none; white-space: nowrap;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .nav-pill:hover { border-color: var(--blue); background: rgba(91, 140, 255, 0.16); transform: translateY(-1px); }
+  .nav-pill svg { width: 16px; height: 16px; }
+
+  /* hero maior */
+  h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.04; }
+  .hero { margin-bottom: 52px; }
+  .subtitle { font-size: 18px; }
+
+  /* cards mais marcantes */
+  .release { position: relative; padding: 26px 28px; overflow: hidden; }
+  .release::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--blue), var(--purple));
+    opacity: 0; transition: opacity .2s;
+  }
+  .release:hover { transform: translateY(-5px); box-shadow: 0 26px 60px -24px var(--glow-blue); }
+  .release:hover::before { opacity: 1; }
+  .release.metas::before { background: linear-gradient(180deg, var(--teal), var(--purple)); }
+
+  @media (max-width: 640px) {
+    .nav { margin-bottom: 40px; }
+    .nav-pill { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body::before, body::after, .glow-teal { animation: none; }
+  }
 </style>
 </head>
 <body>
+<div class="glow-teal"></div>
 <div class="wrap">
 
-  <div class="logo fade-up" style="--d:0s">
-    <div class="logo-mark">K</div>
-    <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
-  </div>
+  <header class="nav fade-up" style="--d:0s">
+    <div class="logo">
+      <div class="logo-mark">K</div>
+      <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
+    </div>
+    <a id="nav-cta" class="nav-pill" href="#">Último release <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+  </header>
 
   <div class="hero">
     <div class="release-badge fade-up" style="--d:.05s"><span class="dot"></span>Histórico de releases</div>
@@ -394,6 +463,7 @@
   // CTA do hero aponta para o release mais recente (ignora metas/roadmap).
   const latest = releases.find((r) => r.type !== 'metas') || releases[0];
   document.getElementById('cta').href = latest.link;
+  document.getElementById('nav-cta').href = latest.link;
 
   const list = document.getElementById('list');
   releases.forEach((r, i) => {
