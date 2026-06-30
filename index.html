@@ -233,6 +233,26 @@
   .count.melhoria { color: var(--blue-light); border-color: rgba(91, 140, 255, 0.45); background: rgba(91, 140, 255, 0.1); }
   .count.correcao { color: #c4a6ff; border-color: rgba(160, 107, 255, 0.4); background: rgba(160, 107, 255, 0.09); }
 
+  /* item especial: metas / roadmap */
+  .release.metas {
+    border-color: rgba(45, 212, 160, 0.45);
+    background: linear-gradient(120deg, rgba(45,212,160,0.10), rgba(160,107,255,0.10) 60%, var(--bg-card));
+  }
+  .release.metas:hover { border-color: rgba(45, 212, 160, 0.75); }
+  .metas-date { border-right-color: rgba(45, 212, 160, 0.3); }
+  .metas-date .goal-ico {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px; line-height: 1; color: var(--teal);
+    text-shadow: 0 0 16px rgba(45, 212, 160, 0.5);
+  }
+  .release-tag.metas-tag {
+    border-color: rgba(45, 212, 160, 0.5);
+    background: rgba(45, 212, 160, 0.12);
+    color: var(--teal);
+  }
+  .count.track-back { color: var(--blue-light); border-color: rgba(91, 140, 255, 0.45); background: rgba(91, 140, 255, 0.1); }
+  .count.track-front { color: #c4a6ff; border-color: rgba(160, 107, 255, 0.4); background: rgba(160, 107, 255, 0.09); }
+
   .chevron {
     flex-shrink: 0;
     font-size: 22px;
@@ -298,6 +318,15 @@
   // Para registrar uma nova atualização, adicione um objeto no TOPO deste array.
   const releases = [
     {
+      type: 'metas',
+      date: '2026-07-01',
+      range: 'JUN · JUL',
+      title: 'Metas Junho/Julho',
+      tag: 'Roadmap',
+      desc: 'O que já entregamos e o que vem por aí no backend e no front.',
+      link: 'metas-junho-julho.html',
+    },
+    {
       date: '2026-06-22',
       version: 'Release · 22 de junho de 2026',
       tag: 'Atual',
@@ -322,10 +351,35 @@
 
   const list = document.getElementById('list');
   releases.forEach((r) => {
-    const [year, month, day] = r.date.split('-').map(Number);
     const a = document.createElement('a');
-    a.className = 'release';
     a.href = r.link;
+
+    // Item especial de metas / roadmap (estilo próprio).
+    if (r.type === 'metas') {
+      a.className = 'release metas';
+      a.innerHTML = `
+        <div class="release-date metas-date">
+          <div class="goal-ico">◎</div>
+          <div class="my">${r.range}</div>
+        </div>
+        <div class="release-main">
+          <div class="release-top">
+            <span class="release-version">${r.title}</span>
+            ${r.tag ? `<span class="release-tag metas-tag">${r.tag}</span>` : ''}
+          </div>
+          <div class="release-desc">${r.desc}</div>
+          <div class="counts">
+            <span class="count track-back">Backend</span>
+            <span class="count track-front">Front</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>`;
+      list.appendChild(a);
+      return;
+    }
+
+    const [year, month, day] = r.date.split('-').map(Number);
+    a.className = 'release';
     a.innerHTML = `
       <div class="release-date">
         <div class="day">${String(day).padStart(2, '0')}</div>
