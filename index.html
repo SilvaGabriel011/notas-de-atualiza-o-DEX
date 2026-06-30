@@ -123,9 +123,10 @@
   }
   h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(30px, 5vw, 44px);
+    font-size: clamp(32px, 5.5vw, 50px);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     margin-bottom: 14px;
   }
   h1 .highlight {
@@ -288,20 +289,61 @@
     .release-desc { font-size: 13.5px; }
     .chevron { display: none; }
   }
+
+  /* ====== elevação: entrada animada, ícone no título e CTA ====== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  h1 .h-ico {
+    width: 0.78em; height: 0.78em;
+    vertical-align: -0.07em;
+    margin-right: 0.16em;
+    color: var(--blue-light);
+  }
+  .cta-row { margin-top: 30px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 15px 26px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(91, 140, 255, 0.30);
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+  }
+  .cta:hover { transform: scale(1.04); filter: brightness(1.08); box-shadow: 0 10px 32px rgba(91, 140, 255, 0.42); }
+  .cta:active { transform: scale(0.97); }
+  .cta svg { width: 20px; height: 20px; }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { animation: none; opacity: 1; transform: none; }
+    .cta { transition: none; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="logo">
+  <div class="logo fade-up" style="--d:0s">
     <div class="logo-mark">K</div>
     <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
   </div>
 
   <div class="hero">
-    <div class="release-badge"><span class="dot"></span>Histórico de releases</div>
-    <h1>Notas de <span class="highlight">Atualização</span></h1>
-    <p class="subtitle">Cada release que sobe pra plataforma fica registrado aqui. Clique numa linha para ver as notas daquela atualização.</p>
+    <div class="release-badge fade-up" style="--d:.05s"><span class="dot"></span>Histórico de releases</div>
+    <h1 class="fade-up" style="--d:.12s"><svg class="h-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>Notas de <span class="highlight">Atualização</span></h1>
+    <p class="subtitle fade-up" style="--d:.19s">Cada release que sobe pra plataforma fica registrado aqui. Clique numa linha para ver as notas daquela atualização.</p>
+    <div class="cta-row fade-up" style="--d:.26s">
+      <a id="cta" class="cta" href="#">Ver último release <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
   </div>
 
   <div class="list" id="list"></div>
@@ -349,14 +391,19 @@
   // Garante a ordem do mais recente para o mais antigo.
   releases.sort((a, b) => b.date.localeCompare(a.date));
 
+  // CTA do hero aponta para o release mais recente (ignora metas/roadmap).
+  const latest = releases.find((r) => r.type !== 'metas') || releases[0];
+  document.getElementById('cta').href = latest.link;
+
   const list = document.getElementById('list');
-  releases.forEach((r) => {
+  releases.forEach((r, i) => {
     const a = document.createElement('a');
     a.href = r.link;
+    a.style.setProperty('--d', (0.32 + i * 0.06) + 's');
 
     // Item especial de metas / roadmap (estilo próprio).
     if (r.type === 'metas') {
-      a.className = 'release metas';
+      a.className = 'release metas fade-up';
       a.innerHTML = `
         <div class="release-date metas-date">
           <div class="goal-ico">◎</div>
@@ -379,7 +426,7 @@
     }
 
     const [year, month, day] = r.date.split('-').map(Number);
-    a.className = 'release';
+    a.className = 'release fade-up';
     a.innerHTML = `
       <div class="release-date">
         <div class="day">${String(day).padStart(2, '0')}</div>

@@ -80,6 +80,7 @@
     line-height: 1.1;
     max-width: 700px;
     margin: 0 auto 20px;
+    letter-spacing: -0.01em;
   }
   h1 .grad {
     background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 55%, #4dd6e8 100%);
@@ -204,11 +205,31 @@
     font-weight: 600;
     text-decoration: none;
     backdrop-filter: blur(12px);
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
   }
   .back-btn:hover {
     border-color: rgba(91, 140, 255, 0.7);
     background: rgba(15, 22, 60, 0.92);
+    transform: scale(1.03);
+  }
+  /* ====== elevação: entrada animada e ícone no título ====== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  .h-ico {
+    width: 0.78em; height: 0.78em;
+    vertical-align: -0.07em;
+    margin-right: 0.16em;
+    color: var(--blue-light);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { animation: none; opacity: 1; transform: none; }
   }
 </style>
 </head>
@@ -221,11 +242,11 @@
       <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
     </div>
     <br>
-    <div class="chip"><span class="dot"></span>Release · 22 de junho de 2026</div>
-    <h1>O que há de <span class="grad">novo</span> na plataforma</h1>
-    <p>Novidades, melhorias e correções que chegaram à Kotai DEX neste release.</p>
+    <div class="chip fade-up" style="--d:.05s"><span class="dot"></span>Release · 22 de junho de 2026</div>
+    <h1 class="fade-up" style="--d:.12s"><svg class="h-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>O que há de <span class="grad">novo</span> na plataforma</h1>
+    <p class="fade-up" style="--d:.19s">Novidades, melhorias e correções que chegaram à Kotai DEX neste release.</p>
 
-    <div class="meter">
+    <div class="meter fade-up" style="--d:.26s">
       <div class="bar">
         <div class="seg n"></div>
         <div class="seg m"></div>
@@ -241,7 +262,7 @@
 
   <div class="content">
 
-    <details open>
+    <details open class="fade-up" style="--d:.34s">
       <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">2 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Quando o impacto de preço é zero, agora aparece como &gt;0,00% em vez de parecer erro ou tela travada.</span></div>
@@ -249,7 +270,7 @@
       </div>
     </details>
 
-    <details open>
+    <details open class="fade-up" style="--d:.41s">
       <summary><span class="ico">◈</span>Posições e Pools<span class="meta"><span class="qty">4 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Padronizamos os campos da tela de criação de posição para um comportamento mais consistente.</span></div>
@@ -259,14 +280,14 @@
       </div>
     </details>
 
-    <details open>
+    <details open class="fade-up" style="--d:.48s">
       <summary><span class="ico">▣</span>Navegação e Layout<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Ajustamos o seletor entre as telas de Mercado e Início para seguir o padrão visual do app.</span></div>
       </div>
     </details>
 
-    <div class="backstage">
+    <div class="backstage fade-up" style="--d:.55s">
       <h2>⚙ Nos bastidores</h2>
       <p>Por trás das telas, esta semana foi grande no backend. Concluímos o <strong>fluxo completo de compra de cripto via PIX</strong> (deposit, purchase e send), que entra em produção assim que a tela for integrada, e adicionamos <strong>preços em BRL e USD</strong> com conversão no servidor. Também simplificamos a <strong>autenticação</strong>, corrigimos o cálculo de <strong>APR exibido nas pools</strong> e melhoramos o swap com <strong>suporte automático a token nativo</strong>. E começamos a construir a nova versão do frontend em <strong>Next.js</strong>.</p>
     </div>
