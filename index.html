@@ -123,9 +123,10 @@
   }
   h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(30px, 5vw, 44px);
+    font-size: clamp(32px, 5.5vw, 50px);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     margin-bottom: 14px;
   }
   h1 .highlight {
@@ -233,6 +234,26 @@
   .count.melhoria { color: var(--blue-light); border-color: rgba(91, 140, 255, 0.45); background: rgba(91, 140, 255, 0.1); }
   .count.correcao { color: #c4a6ff; border-color: rgba(160, 107, 255, 0.4); background: rgba(160, 107, 255, 0.09); }
 
+  /* item especial: metas / roadmap */
+  .release.metas {
+    border-color: rgba(45, 212, 160, 0.45);
+    background: linear-gradient(120deg, rgba(45,212,160,0.10), rgba(160,107,255,0.10) 60%, var(--bg-card));
+  }
+  .release.metas:hover { border-color: rgba(45, 212, 160, 0.75); }
+  .metas-date { border-right-color: rgba(45, 212, 160, 0.3); }
+  .metas-date .goal-ico {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px; line-height: 1; color: var(--teal);
+    text-shadow: 0 0 16px rgba(45, 212, 160, 0.5);
+  }
+  .release-tag.metas-tag {
+    border-color: rgba(45, 212, 160, 0.5);
+    background: rgba(45, 212, 160, 0.12);
+    color: var(--teal);
+  }
+  .count.track-back { color: var(--blue-light); border-color: rgba(91, 140, 255, 0.45); background: rgba(91, 140, 255, 0.1); }
+  .count.track-front { color: #c4a6ff; border-color: rgba(160, 107, 255, 0.4); background: rgba(160, 107, 255, 0.09); }
+
   .chevron {
     flex-shrink: 0;
     font-size: 22px;
@@ -268,20 +289,130 @@
     .release-desc { font-size: 13.5px; }
     .chevron { display: none; }
   }
+
+  /* ====== elevação: entrada animada, ícone no título e CTA ====== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  h1 .h-ico {
+    width: 0.78em; height: 0.78em;
+    vertical-align: -0.07em;
+    margin-right: 0.16em;
+    color: var(--blue-light);
+  }
+  .cta-row { margin-top: 30px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 15px 26px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(91, 140, 255, 0.30);
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+  }
+  .cta:hover { transform: scale(1.04); filter: brightness(1.08); box-shadow: 0 10px 32px rgba(91, 140, 255, 0.42); }
+  .cta:active { transform: scale(0.97); }
+  .cta svg { width: 20px; height: 20px; }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { animation: none; opacity: 1; transform: none; }
+    .cta { transition: none; }
+  }
+
+  /* ====== redesign ousado (dark Kotai) ====== */
+  /* fundo com gradientes em movimento */
+  @keyframes drift1 {
+    0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+    50%      { transform: translateX(-44%) translateY(48px) scale(1.18); }
+  }
+  @keyframes drift2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-70px, -48px) scale(1.12); }
+  }
+  @keyframes drift3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: .6; }
+    50%      { transform: translate(60px, 40px) scale(1.22); opacity: 1; }
+  }
+  body::before { animation: drift1 22s ease-in-out infinite; }
+  body::after  { animation: drift2 26s ease-in-out infinite; }
+  .glow-teal {
+    position: fixed; z-index: 0; pointer-events: none;
+    top: 24%; left: -220px; width: 640px; height: 640px;
+    background: radial-gradient(ellipse, rgba(45,212,160,0.12) 0%, transparent 65%);
+    animation: drift3 30s ease-in-out infinite;
+  }
+
+  /* navbar */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 60px;
+  }
+  .nav .logo { margin-bottom: 0; }
+  .nav-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: rgba(91, 140, 255, 0.08);
+    color: var(--blue-light); font-weight: 600; font-size: 14px;
+    text-decoration: none; white-space: nowrap;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .nav-pill:hover { border-color: var(--blue); background: rgba(91, 140, 255, 0.16); transform: translateY(-1px); }
+  .nav-pill svg { width: 16px; height: 16px; }
+
+  /* hero maior */
+  h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.04; }
+  .hero { margin-bottom: 52px; }
+  .subtitle { font-size: 18px; }
+
+  /* cards mais marcantes */
+  .release { position: relative; padding: 26px 28px; overflow: hidden; }
+  .release::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--blue), var(--purple));
+    opacity: 0; transition: opacity .2s;
+  }
+  .release:hover { transform: translateY(-5px); box-shadow: 0 26px 60px -24px var(--glow-blue); }
+  .release:hover::before { opacity: 1; }
+  .release.metas::before { background: linear-gradient(180deg, var(--teal), var(--purple)); }
+
+  @media (max-width: 640px) {
+    .nav { margin-bottom: 40px; }
+    .nav-pill { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body::before, body::after, .glow-teal { animation: none; }
+  }
 </style>
 </head>
 <body>
+<div class="glow-teal"></div>
 <div class="wrap">
 
-  <div class="logo">
-    <div class="logo-mark">K</div>
-    <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
-  </div>
+  <header class="nav fade-up" style="--d:0s">
+    <div class="logo">
+      <div class="logo-mark">K</div>
+      <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
+    </div>
+    <a id="nav-cta" class="nav-pill" href="#">Último release <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+  </header>
 
   <div class="hero">
-    <div class="release-badge"><span class="dot"></span>Histórico de releases</div>
-    <h1>Notas de <span class="highlight">Atualização</span></h1>
-    <p class="subtitle">Cada release que sobe pra plataforma fica registrado aqui. Clique numa linha para ver as notas daquela atualização.</p>
+    <div class="release-badge fade-up" style="--d:.05s"><span class="dot"></span>Histórico de releases</div>
+    <h1 class="fade-up" style="--d:.12s">Notas de <span class="highlight">Atualização</span></h1>
+    <p class="subtitle fade-up" style="--d:.19s">Cada release que sobe pra plataforma fica registrado aqui. Clique numa linha para ver as notas daquela atualização.</p>
+    <div class="cta-row fade-up" style="--d:.26s">
+      <a id="cta" class="cta" href="#">Ver último release <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
   </div>
 
   <div class="list" id="list"></div>
@@ -297,6 +428,15 @@
   // Lista de releases, do mais recente para o mais antigo.
   // Para registrar uma nova atualização, adicione um objeto no TOPO deste array.
   const releases = [
+    {
+      type: 'metas',
+      date: '2026-07-01',
+      range: 'JUN · JUL',
+      title: 'Metas Junho/Julho',
+      tag: 'Roadmap',
+      desc: 'O que já entregamos e o que vem por aí no backend e no front.',
+      link: 'metas-junho-julho.html',
+    },
     {
       date: '2026-06-22',
       version: 'Release · 22 de junho de 2026',
@@ -320,12 +460,43 @@
   // Garante a ordem do mais recente para o mais antigo.
   releases.sort((a, b) => b.date.localeCompare(a.date));
 
+  // CTA do hero aponta para o release mais recente (ignora metas/roadmap).
+  const latest = releases.find((r) => r.type !== 'metas') || releases[0];
+  document.getElementById('cta').href = latest.link;
+  document.getElementById('nav-cta').href = latest.link;
+
   const list = document.getElementById('list');
-  releases.forEach((r) => {
-    const [year, month, day] = r.date.split('-').map(Number);
+  releases.forEach((r, i) => {
     const a = document.createElement('a');
-    a.className = 'release';
     a.href = r.link;
+    a.style.setProperty('--d', (0.32 + i * 0.06) + 's');
+
+    // Item especial de metas / roadmap (estilo próprio).
+    if (r.type === 'metas') {
+      a.className = 'release metas fade-up';
+      a.innerHTML = `
+        <div class="release-date metas-date">
+          <div class="goal-ico">◎</div>
+          <div class="my">${r.range}</div>
+        </div>
+        <div class="release-main">
+          <div class="release-top">
+            <span class="release-version">${r.title}</span>
+            ${r.tag ? `<span class="release-tag metas-tag">${r.tag}</span>` : ''}
+          </div>
+          <div class="release-desc">${r.desc}</div>
+          <div class="counts">
+            <span class="count track-back">Backend</span>
+            <span class="count track-front">Front</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>`;
+      list.appendChild(a);
+      return;
+    }
+
+    const [year, month, day] = r.date.split('-').map(Number);
+    a.className = 'release fade-up';
     a.innerHTML = `
       <div class="release-date">
         <div class="day">${String(day).padStart(2, '0')}</div>

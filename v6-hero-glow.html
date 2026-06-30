@@ -80,6 +80,7 @@
     line-height: 1.1;
     max-width: 700px;
     margin: 0 auto 20px;
+    letter-spacing: -0.01em;
   }
   h1 .grad {
     background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 55%, #4dd6e8 100%);
@@ -204,11 +205,31 @@
     font-weight: 600;
     text-decoration: none;
     backdrop-filter: blur(12px);
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
   }
   .back-btn:hover {
     border-color: rgba(91, 140, 255, 0.7);
     background: rgba(15, 22, 60, 0.92);
+    transform: scale(1.03);
+  }
+  /* ====== elevação: entrada animada e ícone no título ====== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  .h-ico {
+    width: 0.78em; height: 0.78em;
+    vertical-align: -0.07em;
+    margin-right: 0.16em;
+    color: var(--blue-light);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { animation: none; opacity: 1; transform: none; }
   }
 </style>
 </head>
@@ -221,11 +242,11 @@
       <div class="logo-text">KOTAI <span class="dex">DEX</span></div>
     </div>
     <br>
-    <div class="chip"><span class="dot"></span>Release · 12 de junho de 2026</div>
-    <h1>O que há de <span class="grad">novo</span> na plataforma</h1>
-    <p>Novidades, melhorias e correções que chegaram à Kotai DEX neste release.</p>
+    <div class="chip fade-up" style="--d:.05s"><span class="dot"></span>Release · 12 de junho de 2026</div>
+    <h1 class="fade-up" style="--d:.12s">O que há de <span class="grad">novo</span> na plataforma</h1>
+    <p class="fade-up" style="--d:.19s">Novidades, melhorias e correções que chegaram à Kotai DEX neste release.</p>
 
-    <div class="meter">
+    <div class="meter fade-up" style="--d:.26s">
       <div class="bar">
         <div class="seg n"></div>
         <div class="seg m"></div>
@@ -241,7 +262,7 @@
 
   <div class="content">
 
-    <details open>
+    <details open class="fade-up" style="--d:.34s">
       <summary><span class="ico">⇄</span>Swap<span class="meta"><span class="qty">5 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag n">Novo</span><span>Novo popup explicando o impacto de preço na tela de swap.</span></div>
@@ -252,7 +273,7 @@
       </div>
     </details>
 
-    <details open>
+    <details open class="fade-up" style="--d:.41s">
       <summary><span class="ico">◈</span>Pools e Liquidez<span class="meta"><span class="qty">8 mudanças</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag n">Novo</span><span>A listagem de pools agora mostra pools de todas as redes.</span></div>
@@ -266,35 +287,35 @@
       </div>
     </details>
 
-    <details>
+    <details class="fade-up" style="--d:.48s">
       <summary><span class="ico">⌖</span>Posições<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Tela de detalhes da posição: carregamento mais coerente, porcentagem na composição e destaque quando a posição sai do range.</span></div>
       </div>
     </details>
 
-    <details>
+    <details class="fade-up" style="--d:.55s">
       <summary><span class="ico">★</span>Tokens<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag n">Novo</span><span>Seus tokens favoritos agora ficam salvos entre sessões.</span></div>
       </div>
     </details>
 
-    <details>
+    <details class="fade-up" style="--d:.62s">
       <summary><span class="ico">▣</span>Carteira e Mobile<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>Novo design da tela de perfil e da troca de rede no mobile.</span></div>
       </div>
     </details>
 
-    <details>
+    <details class="fade-up" style="--d:.69s">
       <summary><span class="ico">⚡</span>Performance e Estabilidade<span class="meta"><span class="qty">1 mudança</span><span class="arrow"></span></span></summary>
       <div class="list">
         <div class="row"><span class="tag m">Melhoria</span><span>A tela inicial carrega muito mais rápido depois de conectar a carteira.</span></div>
       </div>
     </details>
 
-    <div class="backstage">
+    <div class="backstage fade-up" style="--d:.76s">
       <h2>⚙ Nos bastidores</h2>
       <p>Além do que aparece na tela, este release trouxe bastante trabalho de infraestrutura. Um <strong>novo cache</strong> deixou o carregamento dos dados de carteira e de pools mais rápido, vários fluxos de swap e de pagamentos ficaram <strong>mais resistentes a falhas</strong> (com reprocessamento automático no lugar de perder operações), e começamos a montar a base para novidades que vêm por aí, como a <strong>entrada de recursos via PIX</strong>. Nada disso muda a interface, mas deixa a plataforma mais rápida e estável.</p>
     </div>
